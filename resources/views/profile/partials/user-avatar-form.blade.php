@@ -9,12 +9,12 @@
         </p>
     </header>
 
-    <form action="{{ url('/images/upload') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ url('avatar') }}" method="POST" enctype="multipart/form-data">
             @csrf
-            @method('patch')
+            <!-- @method('patch') -->
         <div>
-            <input id="image" name="image" type="file" class="mt-1 block w-full" required/>         
-            <x-input-error class="mt-2" :messages="$errors->get('image')" />
+            <input id="image" name="avatar" type="file" class="mt-1 block w-full" required/>         
+            <x-input-error class="mt-2" :messages="$errors->get('avatar')" />
         </div>
         <p style="margin-top:10px;">
         <div class="flex items-center gap-4">

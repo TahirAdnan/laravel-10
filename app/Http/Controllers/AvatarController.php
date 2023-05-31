@@ -1,37 +1,33 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\Route;
+// use App\Http\Controllers\AvatarController;
+// use App\Http\Controllers\Controller;
+// use App\Http\Requests;
 use Illuminate\Http\Request;
-use App\Models\Avatar;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 
 class AvatarController extends Controller
 {
-    
-    public function index()
+    public function add(Request $request)
     {
-        $images = Avatar::all();
-        return view('avatars.index', compact('images'));
-    }
+        
+        dd($request->file('avatar')->store('avatars'));
+        // dd($request->file('avatar')->store('avatars'));
+        // $request->validate([
+        //     'title' => 'required',
+        //     'image' => 'required|image|max:2048',
+        // ]);
     
-    public function store(Request $request)
-    {
-        dd($request);
-        $request->validate([
-            'title' => 'required',
-            'image' => 'required|image|max:2048',
-        ]);
+        // $avatarPath = $request->file('image')->store('public/images');
+        // $avatar = new Image([
+        //     'title' => $request->get('title'),
+        //     'image_path' => $avatarPath,
+        // ]);
+        // $avatar->save();
     
-        $avatarPath = $request->file('image')->store('public/images');
-        $avatar = new Image([
-            'title' => $request->get('title'),
-            'image_path' => $avatarPath,
-        ]);
-        $avatar->save();
-    
-        return redirect('/images')->with('success', 'Image uploaded successfully');
+        return redirect(route('profile.edit'))->with('success', 'Avatar uploaded successfully');
     }    
 
 }
