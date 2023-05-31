@@ -1,21 +1,9 @@
-<style>
-    #profile-container {
-    width: 150px;
-    height: 150px;
-    overflow: hidden;
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    -ms-border-radius: 50%;
-    -o-border-radius: 50%;
-    border-radius: 50%;
-}
-</style>
 <section>
     <header>
         <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
             {{ __('User Avatar') }}
         </h2>
-        <!-- Profile image         -->
+        <!-- Profile image -->
         <?php
            $avatarPath = "/storage/$user->avatar";
         ?>
