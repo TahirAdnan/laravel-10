@@ -1,9 +1,25 @@
+<style>
+    #profile-container {
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    border-radius: 50%;
+}
+</style>
 <section>
     <header>
         <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
             {{ __('User Avatar') }}
         </h2>
-
+        <!-- Profile image         -->
+        <?php
+           $avatarPath = "/storage/$user->avatar";
+        ?>
+        <img class="h-8 w-8 rounded-full" src="{{$avatarPath}}" alt="User Avatar" />
         <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
             {{ __("Update your profile avatar.") }}
         </p>
@@ -18,9 +34,8 @@
         </div>
         <p style="margin-top:10px;">
         <div class="flex items-center gap-4">
-        <!-- <button type="submit" class="btn btn-primary">Upload</button> -->
             <x-primary-button>{{ __('Upload') }}</x-primary-button>
-            @if (session('status') === 'profile-updated')
+            @if (session('status') === 'Avatar-uploaded')
                 <p
                     x-data="{ show: true }"
                     x-show="show"
