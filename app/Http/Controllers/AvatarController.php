@@ -13,7 +13,7 @@ class AvatarController extends Controller
     public function add(Request $request)
     {
         
-        dd($request->file('avatar')->store('avatars'));
+        $request->file('avatar')->store('avatars');
         // dd($request->file('avatar')->store('avatars'));
         // $request->validate([
         //     'title' => 'required',
