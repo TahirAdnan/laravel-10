@@ -29,6 +29,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::post('avatar', [AvatarController::class, 'add']);
+    Route::post('openai_new', [AvatarController::class, 'generate_image']);
     //  Avatar routes    
     // Route::get('/profile', [AvatarController::class, 'update']);
     // Route::post('profile', [AvatarController::class, 'add']);
@@ -38,21 +39,19 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__ . '/auth.php';
 
-Route::get('/OpenAI', function () {
+// Route::get('/OpenAI', function () {
 
-    //  Code for general text result
+//  Code for general text result
     // $result = OpenAI::completions()->create([
     //     'model' => 'text-davinci-003',
     //     'prompt' => 'Tahir Adnan Atta is',
     // ]);
 
-    //  Code for images result
-    $result = OpenAI::images()->create([
-        "prompt" => "Avatar of Adnan Atta",
-        "n" => 1,
-        "size" => "256x256"
-    ]);
-    return response(['url' => $result->data[0]['url']]);
-    // dd($result->data[0]['url']);
-    // echo $result['choices'][0]['text']; // an open-source, widely-used, server-side scripting language.
-});
+//  Code for images result
+    // $result = OpenAI::images()->create([
+    //     "prompt" => "Avatar of Adnan Atta",
+    //     "n" => 1,
+    //     "size" => "256x256"
+    // ]);
+    // return response(['url' => $result->data[0]['url']]);
+// });

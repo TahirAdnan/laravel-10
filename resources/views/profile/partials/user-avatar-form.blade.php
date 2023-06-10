@@ -3,13 +3,29 @@
         <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
             {{ __('User Avatar') }}
         </h2>
+
         <!-- Profile image -->
         <?php
-           $avatarPath = "/storage/$user->avatar";
+            if (session('gen_image_url') != null){
+                $avatarPath = session('gen_image_url');
+            } else {
+                $avatarPath = "/storage/$user->avatar";
+            }
         ?>
-        <img class="h-8 w-8 rounded-full" src="{{$avatarPath}}" alt="User Avatar" />
+        <img class="h-10 w-10 rounded-full" src="{{$avatarPath}}" alt="User Avatar" />
+
+
+        <!-- Generate image with AI -->
+        <form action="{{ url('openai_new') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
+                {{ __("Generate avatar from AI.") }}
+            </p>
+            <x-primary-button>{{ __('Generate Image') }}</x-primary-button>
+        </form>
+
         <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
-            {{ __("Update your profile avatar.") }}
+            {{ __("Update avatar form computer.") }}
         </p>
     </header>
 
@@ -22,7 +38,7 @@
         </div>
         <p style="margin-top:10px;">
         <div class="flex items-center gap-4">
-            <x-primary-button>{{ __('Upload') }}</x-primary-button>
+            <x-primary-button>{{ __('Upload Image') }}</x-primary-button>
             @if (session('status') === 'Avatar-uploaded')
                 <p
                     x-data="{ show: true }"
