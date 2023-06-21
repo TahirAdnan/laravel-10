@@ -1,10 +1,8 @@
 <x-guest-layout>
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
-
     <form method="POST" action="{{ route('login') }}">
         @csrf
-
         <!-- Email Address -->
         <div>
             <x-input-label for="email" :value="__('Email')" />
@@ -32,6 +30,7 @@
             </label>
         </div>
 
+        <!-- Login Button -->
         <div class="flex items-center justify-end mt-4">
             @if (Route::has('password.request'))
                 <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('password.request') }}">
@@ -43,5 +42,17 @@
                 {{ __('Log in') }}
             </x-primary-button>
         </div>
+    </form>
+
+    <!-- Login with Github -->
+    <form method="POST" action="{{ route('login.github') }}" class="text-center">
+        @csrf
+        <x-primary-button class="mt-4">Login with Github</x-primary-button>
+    </form>
+
+    <!-- Login with Facebook -->
+    <form method="POST" action="{{ route('login.facebook') }}" class="text-center">
+        @csrf
+        <x-primary-button class="mt-4">Login with Facebook</x-primary-button>
     </form>
 </x-guest-layout>
