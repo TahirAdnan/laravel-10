@@ -50,9 +50,15 @@
         <x-primary-button class="mt-4">Login with Github</x-primary-button>
     </form>
 
+    <!-- Login with Google -->
+    <form method="POST" action="{{ route('login.google') }}" class="text-center">
+        @csrf
+        <x-primary-button class="mt-4">Login with Google</x-primary-button>
+    </form>
+    
     <!-- Login with Facebook -->
     <form method="POST" action="{{ route('login.facebook') }}" class="text-center">
         @csrf
         <x-primary-button class="mt-4">Login with Facebook</x-primary-button>
-    </form>
+    </form>    
 </x-guest-layout>

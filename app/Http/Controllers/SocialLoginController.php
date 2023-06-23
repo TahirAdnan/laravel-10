@@ -40,5 +40,23 @@ class SocialLoginController extends Controller
         );
         Auth::login($user);
         return redirect('/dashboard');
-    }   
+    } 
+    
+    // Login with google
+    public function googleLogin()
+    { 
+        return Socialite::driver('google')->redirect();
+    }
+
+    public function googleCallback()
+    {   
+        $user = Socialite::driver('google')->user();
+        $user = User::firstOrCreate(
+            ['email' => $user->email],
+            ['name' => $user->name,'password' => 'password'],
+            ['email' => $user->avatar]
+        );
+        Auth::login($user);
+        return redirect('/dashboard');
+    } 
 }

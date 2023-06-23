@@ -3,7 +3,6 @@
 use App\Http\Controllers\SocialLoginController;
 use App\Http\Controllers\AvatarController;
 use App\Http\Controllers\ProfileController;
-use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Facades\Route;
 
 
@@ -44,3 +43,7 @@ Route::get('githubCallback', [SocialLoginController::class, 'githubCallback']);
 // Login with facebook
 Route::post('facebookRedirect', [SocialLoginController::class, 'facebookLogin'])->name('login.facebook');    
 Route::get('facebookCallback', [SocialLoginController::class, 'facebookCallback']);
+
+// Login with google
+Route::post('googleRedirect', [SocialLoginController::class, 'googleLogin'])->name('login.google');    
+Route::get('googleCallback', [SocialLoginController::class, 'googleCallback']);
