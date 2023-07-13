@@ -16,7 +16,7 @@
             <form method="get" action="{{ route('make.payment') }}" class="mt-6 space-y-6">
                 @csrf
                 <h2>Product:  Mobile Phone</h2>
-                <h2>Price: $200</h2>
+                <h2>Price: $20</h2>
                 <input type="hidden" name="price" value="20">
                 <x-primary-button>{{ __('Pay with PayPal') }}</x-primary-button>
             </form>

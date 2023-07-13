@@ -54,4 +54,4 @@ Route::controller(PaymentController::class)->prefix('paypal')->group(function ()
         Route::get('handle-payment', 'handlePayment')->name('make.payment');
         Route::get('cancel-payment', 'paymentCancel')->name('cancel.payment');
         Route::get('payment-success', 'paymentSuccess')->name('success.payment');
-    });
+});
