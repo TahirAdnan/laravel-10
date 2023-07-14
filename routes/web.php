@@ -28,7 +28,7 @@ Route::get('/dashboard', function () {
 
 // Authentication
 Route::middleware('auth')->group(function () {
-    Route::view('paypal/payment', 'payp al.index')->name('create.payment');
+    Route::view('paypal/payment', 'paypal.index')->name('create.payment');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -57,3 +57,5 @@ Route::get('facebookCallback', [SocialLoginController::class, 'facebookCallback'
 Route::post('googleRedirect', [SocialLoginController::class, 'googleLogin'])->name('login.google');    
 Route::get('googleCallback', [SocialLoginController::class, 'googleCallback']);
 
+// Mepco bill details
+Route::get('myMepcoBill', [PaymentController::class, 'getMepcoBill'])->name('myMepcoBill');
