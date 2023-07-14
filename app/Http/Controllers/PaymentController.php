@@ -57,11 +57,11 @@ class PaymentController extends Controller
         $response = $provider->capturePaymentOrder($request['token']);
         if (isset($response['status']) && $response['status'] == 'COMPLETED') {
             return redirect()
-                ->route('create.payment')
+                ->route('dashboard')
                 ->with('success', 'Transaction complete.');
         } else {
             return redirect()
-                ->route('create.payment')
+                ->route('dashboard')
                 ->with('error', $response['message'] ?? 'Something went wrong.');
         }
     }

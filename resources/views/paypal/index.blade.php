@@ -20,6 +20,7 @@
                 <input type="hidden" name="price" value="20">
                 <x-primary-button>{{ __('Pay with PayPal') }}</x-primary-button>
             </form>
+            <a href="http://localhost:8000/dashboard" class="scale-100 p-6 bg-white">Cancel</a>
         </div>
     </body>
 </html>
