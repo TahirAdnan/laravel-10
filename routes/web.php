@@ -28,6 +28,7 @@ Route::get('/dashboard', function () {
 
 // Authentication
 Route::middleware('auth')->group(function () {
+    Route::view('stripe/payment', 'stripe.index')->name('create.payment');
     Route::view('paypal/payment', 'paypal.index')->name('create.payment');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -43,6 +44,12 @@ Route::controller(PaymentController::class)->prefix('paypal')->group(function ()
     Route::get('cancel-payment', 'paymentCancel')->name('cancel.payment');
     Route::get('payment-success', 'paymentSuccess')->name('success.payment');
 });
+
+// Stripe
+Route::post('stripe_card', [PaymentController::class, 'stripe'])->name('payment.stripeCard');
+Route::post('stripe-payment', [PaymentController::class, 'stripePayment'])->name('stripe.payment');
+
+
 require __DIR__ . '/auth.php';
 
 // Login with github

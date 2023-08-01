@@ -1,12 +1,35 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Session;
 use Illuminate\Http\Request;
+use Stripe;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
 
 class PaymentController extends Controller
 {
+
+    // Stripe card info view
+    public function stripe(Request $request)
+    {
+        return view('stripeCard')->with('price', $request->price);
+    }
+
+    // Stripe payment method
+    public function stripePayment(Request $request)
+    {
+        dd($request);
+        Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+        $paymentIntent = Stripe\Charge::create([
+            "amount" => $request->price*100,
+            "currency" => "USD",
+            "source" => $request->stripeToken,
+            "description" => "This payment is testing purpose of stripe",
+        ]);
+        dd($paymentIntent);
+        Session::flash('success', 'Payment Successfull!');
+        return back();
+    }    
 
     //  Paypal payment method
     public function handlePayment(Request $request)
