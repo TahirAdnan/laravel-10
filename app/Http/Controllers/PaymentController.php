@@ -1,9 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-use Session;
 use Illuminate\Http\Request;
-use Stripe;
+use Stripe\Stripe;
+use Stripe\Charge;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
 
 class PaymentController extends Controller
@@ -18,18 +18,21 @@ class PaymentController extends Controller
     // Stripe payment method
     public function stripePayment(Request $request)
     {
-        dd($request);
-        Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
-        $paymentIntent = Stripe\Charge::create([
-            "amount" => $request->price*100,
-            "currency" => "USD",
-            "source" => $request->stripeToken,
-            "description" => "This payment is testing purpose of stripe",
-        ]);
-        dd($paymentIntent);
-        Session::flash('success', 'Payment Successfull!');
-        return back();
-    }    
+        Stripe::setApiKey(env('STRIPE_SECRET'));
+        try {
+            $paymentIntent = Charge::create([
+                'amount' => $request->price * 100,
+                'currency' => 'USD',
+                'source' => $request->stripeToken,
+                'description' => 'This payment is testing purpose of stripe',
+            ]);
+            // Payment successful, you can do further processing here
+            // return redirect()->back()->with('success', 'Payment successful!');
+            return redirect()->route('dashboard')->with('success', 'Payment successful!');
+        } catch (\Exception $e) {
+            return redirect()->route('dashboard')->with('error' , 'Something went wrong');
+        }
+    }     
 
     //  Paypal payment method
     public function handlePayment(Request $request)
@@ -98,7 +101,7 @@ class PaymentController extends Controller
         // $consumerNumber="09154291243900";
         $consumerNumber = $request->refno;
         // URL for the Mepco bill inquiry
-        $url = "https://checkmepcobill.pk/mepco-bill-summary/?ref=" . $consumerNumber;
+        $url = "https://checkmepcobill.pk/mepco-bill-summary/?refno=" . $consumerNumber.'&company=mepco';
 
         // Create a new cURL resource
         $ch = curl_init();
